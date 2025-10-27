@@ -1,0 +1,155 @@
+.manage-loans-btn {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-bottom: 0.8em;
+}
+
+.manage-loans-btn:hover {
+    background-color: #0056b3;
+}
+
+.loan-manager {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.loan-form {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #333;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    font-size: 1rem;
+    background-color: #fff;
+    transition: border-color 0.15s ease-in-out;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.loan-form button[type='submit'] {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.15s ease-in-out;
+}
+
+.loan-form button[type='submit']:hover {
+    background-color: #0056b3;
+}
+
+.loan-list {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.loan-list h2 {
+    margin-bottom: 1.5rem;
+    color: #333;
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.loan-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.loan-list li {
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+    background: #f8f9fa;
+    border-radius: 4px;
+    border: 1px solid #dee2e6;
+}
+
+.loan-list li strong {
+    color: #007bff;
+}
+
+.loan-list li:last-child {
+    margin-bottom: 0;
+}
+
+.loan-status {
+    color: #dc3545;
+    font-weight: bold;
+    margin-top: 0.5rem;
+}
+
+.no-books-message {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #666;
+    margin: 2rem 0;
+}
+
+.manage-loans-btn {
+    padding: 0.5rem 1rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.manage-loans-btn:hover {
+    background-color: #0056b3;
+    transition: background-color 0.2s;
+}
+
+.no-books-message {
+    text-align: center;
+    padding: 2rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color: #666;
+    font-size: 1.1rem;
+}
+
+.loan-status {
+    color: #dc3545;
+    font-weight: 500;
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+}

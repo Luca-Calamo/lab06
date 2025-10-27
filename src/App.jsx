@@ -5,6 +5,7 @@ import New from './New';
 import Footer from './Footer';
 import Modal from './Modal';
 import ProductForm from './ProductForm';
+import LoanManager from './LoanManager';
 import './App.css';
 
 function App() {
@@ -12,9 +13,16 @@ function App() {
         const savedBooks = localStorage.getItem('books');
         return savedBooks ? JSON.parse(savedBooks) : [];
     });
+
+    const [loans, setLoans] = useState(() => {
+        const savedLoans = localStorage.getItem('loans');
+        return savedLoans ? JSON.parse(savedLoans) : [];
+    });
+
     const [selectedBookId, setSelectedBookId] = useState(null);
     const [searchTerm, setSearchTerm] = useState('');
     const [filterLanguage, setFilterLanguage] = useState('all');
+    const [showLoanManager, setShowLoanManager] = useState(false);
 
     const handleBookSubmit = (formData) => {
         const newBook = {
@@ -77,90 +85,156 @@ function App() {
         }
     };
 
+    const handleCreateLoan = (loanData) => {
+        setLoans((prevLoans) => {
+            const newLoans = [...prevLoans, loanData];
+            localStorage.setItem('loans', JSON.stringify(newLoans));
+            return newLoans;
+        });
+    };
+
+    const filteredBooks = books.filter(
+        (book) =>
+            book.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
+            (filterLanguage === 'all' || book.language === filterLanguage)
+    );
+
     return (
         <div className='page'>
             <Header />
             <div className='content'>
-                <div className='new_grid'>
-                    <New title='New' onSubmit={handleBookSubmit} />
-                    <div className='button-column'>
-                        <input
-                            type='text'
-                            placeholder='Search books...'
-                            value={searchTerm}
-                            onChange={(e) => setSearchTerm(e.target.value)}
-                            className='search-input'
+                {showLoanManager ? (
+                    <>
+                        <div
+                            className='button-column'
+                            style={{ maxWidth: '500px', margin: '0 auto 1rem' }}
+                        >
+                            <button
+                                className='manage-loans-btn'
+                                onClick={() => setShowLoanManager(false)}
+                            >
+                                Show Book Catalog
+                            </button>
+                        </div>
+                        <LoanManager
+                            books={books}
+                            loans={loans}
+                            onCreateLoan={handleCreateLoan}
                         />
-                        <select
-                            value={filterLanguage}
-                            onChange={(e) => setFilterLanguage(e.target.value)}
-                            className='language-filter'
-                        >
-                            <option value='all'>All Languages</option>
-                            {[...new Set(books.map((book) => book.language))]
-                                .filter(Boolean)
-                                .sort()
-                                .map((lang) => (
-                                    <option key={lang} value={lang}>
-                                        {lang}
-                                    </option>
-                                ))}
-                        </select>
-                        <Modal
-                            btnLabel='Edit'
-                            btnClassName='btn secondary'
-                            disabled={!selectedBookId}
-                        >
-                            {(closeModal) => {
-                                const selectedBook = books.find(
-                                    (book) => book.isbn13 === selectedBookId
-                                );
-                                return (
-                                    <ProductForm
-                                        onSubmit={(formData) => {
-                                            handleUpdateBook(formData);
-                                            closeModal();
-                                        }}
-                                        onClose={closeModal}
-                                        initialData={selectedBook}
+                    </>
+                ) : (
+                    <>
+                        <div className='new_grid'>
+                            <New title='New' onSubmit={handleBookSubmit} />
+                            <div className='button-column'>
+                                <button
+                                    className='manage-loans-btn'
+                                    onClick={() =>
+                                        setShowLoanManager(!showLoanManager)
+                                    }
+                                >
+                                    Manage Loans
+                                </button>
+                                <input
+                                    type='text'
+                                    placeholder='Search books...'
+                                    value={searchTerm}
+                                    onChange={(e) =>
+                                        setSearchTerm(e.target.value)
+                                    }
+                                    className='search-input'
+                                />
+                                <select
+                                    value={filterLanguage}
+                                    onChange={(e) =>
+                                        setFilterLanguage(e.target.value)
+                                    }
+                                    className='language-filter'
+                                >
+                                    <option value='all'>All Languages</option>
+                                    {[
+                                        ...new Set(
+                                            books.map((book) => book.language)
+                                        ),
+                                    ]
+                                        .filter(Boolean)
+                                        .sort()
+                                        .map((lang) => (
+                                            <option key={lang} value={lang}>
+                                                {lang}
+                                            </option>
+                                        ))}
+                                </select>
+                                <Modal
+                                    btnLabel='Edit'
+                                    btnClassName='btn secondary'
+                                    disabled={!selectedBookId}
+                                >
+                                    {(closeModal) => {
+                                        const selectedBook = books.find(
+                                            (book) =>
+                                                book.isbn13 === selectedBookId
+                                        );
+                                        return (
+                                            <ProductForm
+                                                onSubmit={(formData) => {
+                                                    handleUpdateBook(formData);
+                                                    closeModal();
+                                                }}
+                                                onClose={closeModal}
+                                                initialData={selectedBook}
+                                            />
+                                        );
+                                    }}
+                                </Modal>
+                                <button
+                                    className='btn danger'
+                                    onClick={handleDeleteBook}
+                                    disabled={!selectedBookId}
+                                >
+                                    Delete
+                                </button>
+                            </div>
+                        </div>
+                        <div className='books-grid'>
+                            {books
+                                .filter(
+                                    (book) =>
+                                        (filterLanguage === 'all' ||
+                                            book.language === filterLanguage) &&
+                                        (searchTerm === '' ||
+                                            book.title
+                                                .toLowerCase()
+                                                .includes(
+                                                    searchTerm.toLowerCase()
+                                                ) ||
+                                            book.author
+                                                .toLowerCase()
+                                                .includes(
+                                                    searchTerm.toLowerCase()
+                                                ) ||
+                                            book.publisher
+                                                .toLowerCase()
+                                                .includes(
+                                                    searchTerm.toLowerCase()
+                                                ))
+                                )
+                                .map((book) => (
+                                    <Book
+                                        key={book.isbn13}
+                                        book={book}
+                                        onSelect={() =>
+                                            handleBookSelect(book.isbn13)
+                                        }
+                                        isOnLoan={loans.some(
+                                            (loan) =>
+                                                loan.bookId === book.isbn13
+                                        )}
                                     />
-                                );
-                            }}
-                        </Modal>
-                        <button
-                            className='btn danger'
-                            onClick={handleDeleteBook}
-                            disabled={!selectedBookId}
-                        >
-                            Delete
-                        </button>
-                    </div>
-                </div>
-                <div className='books-grid'>
-                    {books
-                        .filter(
-                            (book) =>
-                                (filterLanguage === 'all' ||
-                                    book.language === filterLanguage) &&
-                                (searchTerm === '' ||
-                                    book.title
-                                        .toLowerCase()
-                                        .includes(searchTerm.toLowerCase()) ||
-                                    book.author
-                                        .toLowerCase()
-                                        .includes(searchTerm.toLowerCase()) ||
-                                    book.publisher
-                                        .toLowerCase()
-                                        .includes(searchTerm.toLowerCase()))
-                        )
-                        .map((book) => (
-                            <Book
-                                key={book.isbn13}
-                                book={book}
-                                onSelect={() => handleBookSelect(book.isbn13)}
-                            />
-                        ))}
-                </div>
+                                ))}
+                        </div>
+                    </>
+                )}
             </div>
             <Footer text='Luca Calamo 2025' />
         </div>

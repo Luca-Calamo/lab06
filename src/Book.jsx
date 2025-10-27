@@ -1,4 +1,4 @@
-function Book({ book, onSelect }) {
+function Book({ book, onSelect, isOnLoan }) {
     return (
         <div
             className={`container ${book.selected ? 'selected' : ''}`}
@@ -13,6 +13,7 @@ function Book({ book, onSelect }) {
                 <h3>{book.title}</h3>
                 <p className='author'>{book.author}</p>
                 <p className='price'>{book.price}</p>
+                {isOnLoan && <p className='loan-status'>On Loan</p>}
             </div>
         </div>
     );
