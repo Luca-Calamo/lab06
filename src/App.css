@@ -1,3 +1,20 @@
+.content {
+    padding: 20px;
+    min-height: 400px;
+    background-color: #f5f5f5;
+    position: relative;
+    overflow: visible;
+}
+
+.loan-manager-section {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
 .books-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));

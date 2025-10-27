@@ -93,22 +93,13 @@ function App() {
         });
     };
 
-    const filteredBooks = books.filter(
-        (book) =>
-            book.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
-            (filterLanguage === 'all' || book.language === filterLanguage)
-    );
-
     return (
         <div className='page'>
             <Header />
             <div className='content'>
                 {showLoanManager ? (
-                    <>
-                        <div
-                            className='button-column'
-                            style={{ maxWidth: '500px', margin: '0 auto 1rem' }}
-                        >
+                    <div className='loan-manager-section'>
+                        <div className='button-column loan-manager-button'>
                             <button
                                 className='manage-loans-btn'
                                 onClick={() => setShowLoanManager(false)}
@@ -121,7 +112,7 @@ function App() {
                             loans={loans}
                             onCreateLoan={handleCreateLoan}
                         />
-                    </>
+                    </div>
                 ) : (
                     <>
                         <div className='new_grid'>
@@ -226,10 +217,6 @@ function App() {
                                         onSelect={() =>
                                             handleBookSelect(book.isbn13)
                                         }
-                                        isOnLoan={loans.some(
-                                            (loan) =>
-                                                loan.bookId === book.isbn13
-                                        )}
                                     />
                                 ))}
                         </div>
