@@ -1,0 +1,78 @@
+.books-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1em;
+}
+
+.new_grid {
+    display: flex;
+    gap: 0.8em;
+}
+
+.button-column {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8em;
+    width: 200px;
+}
+
+.btn {
+    padding: 0.5em 1em;
+    border: none;
+    border-radius: 0.4em;
+    cursor: pointer;
+    font-weight: bold;
+    width: 100%;
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn.secondary {
+    background-color: rgb(202, 255, 242);
+}
+
+.btn.danger {
+    background-color: #ffc3c3;
+}
+
+.btn:hover:not(:disabled) {
+    opacity: 0.9;
+}
+
+.search-input,
+.language-filter {
+    padding: 0.5em;
+    border: 1px solid #ccc;
+    border-radius: 0.4em;
+    font-size: 1em;
+    flex: 1;
+}
+
+.search-input:focus,
+.language-filter:focus {
+    outline: none;
+    border-color: rgb(202, 255, 242);
+}
+
+.form-container {
+    padding: 1em;
+}
+
+.form-control {
+    padding: 0.5em;
+}
+
+.form-control input {
+    margin-left: 1em;
+}
+
+.btn.primary {
+    background-color: rgb(202, 255, 242);
+}
+
+.btn.secondary {
+    background-color: rgb(202, 255, 242);
+}
