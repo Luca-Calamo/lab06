@@ -13,6 +13,19 @@ function Modal({ btnLabel, btnClassName, children, disabled }) {
         modalRef.current.close();
     }
 
+    function handleBackdropClick(e) {
+        const rect = modalRef.current.getBoundingClientRect();
+        const isInDialog =
+            rect.top <= e.clientY &&
+            e.clientY <= rect.top + rect.height &&
+            rect.left <= e.clientX &&
+            e.clientX <= rect.left + rect.width;
+
+        if (!isInDialog) {
+            closeModal();
+        }
+    }
+
     return (
         <>
             <button
@@ -22,7 +35,7 @@ function Modal({ btnLabel, btnClassName, children, disabled }) {
             >
                 {btnLabel}
             </button>
-            <dialog ref={modalRef}>
+            <dialog ref={modalRef} onClick={handleBackdropClick}>
                 {typeof children === 'function'
                     ? children(closeModal)
                     : children}
