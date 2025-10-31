@@ -1,9 +1,10 @@
-function Book({ book, onSelect, isOnLoan }) {
+function Book({ book, onSelect }) {
     return (
         <div
             className={`container ${book.selected ? 'selected' : ''}`}
             onClick={onSelect}
         >
+            {book.isLoaned && <div className='loan-badge'>On loan</div>}
             {book.image && (
                 <div className='image'>
                     <img src={book.image} alt={book.title} />
@@ -11,9 +12,8 @@ function Book({ book, onSelect, isOnLoan }) {
             )}
             <div className='info'>
                 <h3>{book.title}</h3>
-                <p className='author'>{book.author}</p>
+                <p className='author'>by {book.author}</p>
                 <p className='price'>{book.price}</p>
-                {isOnLoan && <p className='loan-status'>On Loan</p>}
             </div>
         </div>
     );

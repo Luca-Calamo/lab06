@@ -6,7 +6,7 @@ import Footer from './Footer';
 import Modal from './Modal';
 import ProductForm from './ProductForm';
 import LoanManager from './LoanManager';
-import './App.css';
+import './index.css';
 
 function App() {
     const [books, setBooks] = useState(() => {
@@ -159,7 +159,13 @@ function App() {
                                 <Modal
                                     btnLabel='Edit'
                                     btnClassName='btn secondary'
-                                    disabled={!selectedBookId}
+                                    disabled={
+                                        !selectedBookId ||
+                                        loans.some(
+                                            (loan) =>
+                                                loan.bookId === selectedBookId
+                                        )
+                                    }
                                 >
                                     {(closeModal) => {
                                         const selectedBook = books.find(
@@ -181,7 +187,13 @@ function App() {
                                 <button
                                     className='btn danger'
                                     onClick={handleDeleteBook}
-                                    disabled={!selectedBookId}
+                                    disabled={
+                                        !selectedBookId ||
+                                        loans.some(
+                                            (loan) =>
+                                                loan.bookId === selectedBookId
+                                        )
+                                    }
                                 >
                                     Delete
                                 </button>
@@ -210,15 +222,20 @@ function App() {
                                                     searchTerm.toLowerCase()
                                                 ))
                                 )
-                                .map((book) => (
-                                    <Book
-                                        key={book.isbn13}
-                                        book={book}
-                                        onSelect={() =>
-                                            handleBookSelect(book.isbn13)
-                                        }
-                                    />
-                                ))}
+                                .map((book) => {
+                                    const isLoaned = loans.some(
+                                        (loan) => loan.bookId === book.isbn13
+                                    );
+                                    return (
+                                        <Book
+                                            key={book.isbn13}
+                                            book={{ ...book, isLoaned }}
+                                            onSelect={() =>
+                                                handleBookSelect(book.isbn13)
+                                            }
+                                        />
+                                    );
+                                })}
                         </div>
                     </>
                 )}

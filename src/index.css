@@ -22,7 +22,14 @@
     padding: 1em;
 }
 
-/* new item container*/
+/* BOOKS GRID */
+.books-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1em;
+}
+
+/* NEW ITEM CONTAINER */
 .new_container {
     grid-row: 1/8;
     border: 3px solid black;
@@ -38,8 +45,45 @@
     grid-row: 1/8;
     display: flex;
     flex-direction: column;
-
     gap: 0.8em;
+}
+
+/* BUTTONS */
+.button-column {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8em;
+    width: 200px;
+}
+
+.btn {
+    padding: 0.5em 1em;
+    border: none;
+    border-radius: 0.4em;
+    cursor: pointer;
+    font-weight: bold;
+    width: 100%;
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn.primary {
+    background-color: rgb(202, 255, 242);
+}
+
+.btn.secondary {
+    background-color: rgb(202, 255, 242);
+}
+
+.btn.danger {
+    background-color: #ffc3c3;
+}
+
+.btn:hover:not(:disabled) {
+    opacity: 0.9;
 }
 
 .edit-btn,
@@ -58,7 +102,23 @@
     background-color: #ffc3c3;
 }
 
-/* book container */
+/* SEARCH AND FILTER */
+.search-input,
+.language-filter {
+    padding: 0.5em;
+    border: 1px solid #ccc;
+    border-radius: 0.4em;
+    font-size: 1em;
+    flex: 1;
+}
+
+.search-input:focus,
+.language-filter:focus {
+    outline: none;
+    border-color: rgb(202, 255, 242);
+}
+
+/* BOOK CONTAINER */
 .container {
     position: relative;
     width: 200px;
@@ -78,7 +138,7 @@
     cursor: pointer;
 }
 
-/* image */
+/* IMAGE */
 .image {
     flex: 0 0 150px; /* fixed height for image */
     width: 100%;
@@ -98,7 +158,7 @@
     border-radius: 0.3em;
 }
 
-/* info section */
+/* INFO SECTION */
 .info {
     margin-top: auto;
     width: 100%;
@@ -113,6 +173,14 @@
     margin: 0;
     font-size: 1em;
     line-height: 1.2;
+    font-size: 0.9em;
+    margin: 0.5em 0;
+    padding: 0 0.2em;
+    max-height: 2.4em; /* max 2 lines */
+    overflow: hidden;
+    text-overflow: ellipsis; /* adds "..." for overflow */
+    white-space: normal;
+    word-break: break-word;
 }
 
 .info .author {
@@ -125,7 +193,6 @@
     margin: 0;
     font-size: 0.9em;
     font-weight: bold;
-
     flex-direction: column;
     justify-content: space-between;
     text-align: center;
@@ -133,19 +200,7 @@
     overflow: hidden;
 }
 
-.info h3 {
-    font-size: 0.9em;
-    margin: 0.5em 0;
-    padding: 0 0.2em;
-    line-height: 1.2em;
-    max-height: 2.4em; /* max 2 lines */
-    overflow: hidden;
-    text-overflow: ellipsis; /* adds "..." for overflow */
-    white-space: normal;
-    word-break: break-word;
-}
-
-/* price */
+/* PRICE */
 .price {
     margin-top: auto; /* sticks to bottom */
     font-size: 1.2em;
@@ -154,8 +209,7 @@
     padding-bottom: 0.5em;
 }
 
-/* books buttons */
-
+/* BOOK BUTTONS */
 .remove-btn {
     position: absolute;
     top: 0;
@@ -178,21 +232,23 @@
 .book-link {
     cursor: crosshair;
 }
+
 .book-link:hover,
 .learn-more:hover {
     background: rgb(138, 255, 144);
 }
 
+/* FORMS */
 .form-container {
     padding: 1em;
-    /* display: flex; */
 }
 
 .form-control {
     padding: 0.5em;
-    > input {
-        margin-left: 1em;
-    }
+}
+
+.form-control input {
+    margin-left: 1em;
 }
 
 /* LINKS */
@@ -215,4 +271,19 @@ a {
 /* BOOK SELECTION */
 .container.selected {
     background-color: #bc7070;
+}
+
+/* LOAN BADGE */
+.loan-badge {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #4dacff;
+    color: white;
+    text-align: center;
+    padding: 0.6em;
+    font-size: 1.1em;
+    font-weight: normal;
+    z-index: 10;
 }

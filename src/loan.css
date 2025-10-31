@@ -1,220 +1,137 @@
+/* Manage Loans Button */
 .manage-loans-btn {
     width: 100%;
     padding: 0.5rem 1rem;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 4px;
+    background-color: white;
+    color: black;
+    border: 1px solid black;
     cursor: pointer;
     font-size: 1rem;
     margin-bottom: 0.8em;
-    transition: background-color 0.15s ease-in-out;
 }
 
-.manage-loans-btn:hover {
-    background-color: #0056b3;
-}
-
+/* Main Container */
 .loan-manager {
-    width: 90%;
-    max-width: 1000px;
-    margin: 2rem auto;
+    max-width: 100%;
+    margin: 0;
     padding: 2rem;
-    background: rgb(255, 255, 255);
 }
 
+/* Page Title */
 .loan-manager-title {
-    margin-bottom: 1rem;
-    font-size: 1.25rem;
-    color: #666;
-}
-
-.loan-manager-button {
-    max-width: 500px;
-    margin: 0 auto 1rem;
-}
-
-.loan-form {
     margin-bottom: 2rem;
-    padding-bottom: 2rem;
-    border-bottom: 1px solid #eee;
+    font-size: 2rem;
+    color: black;
+    font-weight: bold;
+}
+
+/* Form Container */
+.loan-form {
+    background: white;
+    border: 1px solid #ccc;
+    padding: 2rem;
+    margin-bottom: 3rem;
+    width: fit-content;
+    min-width: 450px;
 }
 
 .loan-form-fields {
     display: flex;
-    gap: 2rem;
+    flex-direction: column;
+    gap: 1rem;
     margin-bottom: 1.5rem;
-    justify-content: center;
 }
 
 .form-group {
-    flex: 1;
-    min-width: 200px;
-    max-width: 300px;
-    margin: 0;
-    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
 }
 
 .form-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 500;
-    color: #666;
+    min-width: 180px;
+    color: black;
     text-align: left;
+    font-size: 1rem;
 }
 
 .form-group input,
 .form-group select {
-    width: 100%;
-    padding: 10px 12px;
-    border: 1px solid #dee2e6;
-    border-radius: 4px;
+    width: 250px;
+    padding: 8px;
+    border: 1px solid #ccc;
     font-size: 1rem;
-    height: 42px;
-    line-height: 1.2;
-    background-color: #fff;
-    transition: border-color 0.15s ease-in-out;
+    background-color: white;
     box-sizing: border-box;
-    vertical-align: middle;
-}
-
-.form-group select {
-    padding-right: 30px;
-    appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 10px center;
-    background-size: 12px;
-}
-
-.form-group input:focus,
-.form-group select:focus {
-    outline: none;
-    border-color: #80bdff;
-    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
 
 .loan-form button[type='submit'] {
-    width: auto;
-    min-width: 200px;
-    padding: 0.75rem 2rem;
-    background-color: #28a745;
+    padding: 0.6rem 1.5rem;
+    background-color: #5cb85c;
     color: white;
     border: none;
-    border-radius: 6px;
     font-size: 1rem;
     cursor: pointer;
-    height: 42px;
-    margin: 0.5rem auto;
     display: block;
+    margin: 1rem 0 0 0;
 }
 
-.loan-form button[type='submit']:hover {
-    background-color: #218838;
-}
-
+/* Loaned Books Section */
 .loan-list {
-    padding-top: 1rem;
+    padding-top: 0;
 }
 
 .loan-list h2 {
-    margin-bottom: 1.5rem;
-    color: #333;
-    font-size: 1.25rem;
-    font-weight: 500;
-}
-
-.loan-list ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.loan-list li {
-    padding: 1rem;
-    margin-bottom: 0.75rem;
-    background: #f8f9fa;
-    border-radius: 4px;
-    border: 1px solid #dee2e6;
-}
-
-.loan-list li strong {
-    color: #007bff;
-}
-
-.loan-list li:last-child {
-    margin-bottom: 0;
-}
-
-.loan-status {
-    color: #dc3545;
+    margin-bottom: 2rem;
+    color: black;
+    font-size: 1.5rem;
     font-weight: bold;
-    margin-top: 0.5rem;
 }
 
+.loan-list ul,
 .loans-list {
     list-style: none;
     padding: 0;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1rem;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
 }
 
+.loan-list li,
 .loan-item {
-    padding: 1rem;
-    border: 1px solid #eee;
+    padding: 1.5rem;
+    background: white;
+    border: 1px solid #ccc;
+    width: fit-content;
+    min-width: 450px;
+}
+
+.loan-item strong,
+.loan-list li strong {
+    display: block;
+    font-size: 1.1rem;
     margin-bottom: 0.5rem;
 }
 
 .loan-details {
     margin-top: 0.25rem;
-    color: #6c757d;
-    font-size: 0.9rem;
-}
-
-.no-loans-message {
-    text-align: center;
-    color: #666;
-    padding: 20px;
-    background: #f8f9fa;
-    border-radius: 4px;
-}
-
-.no-books-message {
-    text-align: center;
-    font-size: 1.2rem;
-    color: #666;
-    margin: 2rem 0;
-}
-
-.manage-loans-btn {
-    padding: 0.5rem 1rem;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1rem;
-}
-
-.manage-loans-btn:hover {
-    background-color: #0056b3;
-    transition: background-color 0.2s;
-}
-
-.no-books-message {
-    text-align: center;
-    padding: 2rem;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    color: #666;
-    font-size: 1.1rem;
+    color: black;
+    font-size: 0.95rem;
+    line-height: 1.5;
 }
 
 .loan-status {
-    color: #dc3545;
-    font-weight: 500;
+    color: black;
     margin-top: 0.5rem;
-    font-size: 0.9rem;
+}
+
+/* Empty States */
+.no-loans-message,
+.no-books-message {
+    text-align: center;
+    color: black;
+    padding: 2rem;
+    background: white;
+    font-size: 1rem;
 }
